@@ -213,7 +213,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <div className="text-sm text-text-secondary group-hover:text-text-primary transition-colors">
-                william.rehel@gmail.com
+                hola@warrspa.com
               </div>
             </a>
 
