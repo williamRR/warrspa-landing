@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#1a1a2e"/>
+  <rect x="0" y="0" width="800" height="520" fill="url(#gradient)"/>
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="400" cy="260" r="80" fill="none" stroke="#e94560" stroke-width="4" opacity="0.6"/>
+  <text x="400" y="270" text-anchor="middle" font-family="system-ui" font-size="48" font-weight="bold" fill="#e94560">UMBRAL</text>
+  <text x="400" y="310" text-anchor="middle" font-family="system-ui" font-size="18" fill="#888">Coming soon</text>
+</svg>

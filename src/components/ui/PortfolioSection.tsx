@@ -96,6 +96,22 @@ const projects: Project[] = [
     status: "Código abierto",
     image: "/WARRGRAPH.png",
   },
+  {
+    name: "Umbral",
+    category: "Juego · Estrategia multiplayer en tiempo real",
+    problem:
+      "Juegos de cartas físicos limitados por ubicación geográfica y tiempo. Sin modo online para jugar a distancia.",
+    what: "Juego de cartas async y realtime donde 2-4 jugadores gestionan sistemas de una nave espacial, juegan cartas de ataque, defensa y acciones especiales.",
+    stack: [
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "Socket.IO" },
+      { name: "Tailwind" },
+    ],
+    url: "https://bacterias.vercel.app",
+    status: "En producción",
+    image: "/portfolio-placeholder.svg",
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
