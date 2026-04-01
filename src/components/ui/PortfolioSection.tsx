@@ -22,7 +22,7 @@ const projects: Project[] = [
     category: "SaaS B2B · Restaurantes y deliveries",
     problem:
       "Restaurantes operando con planillas, WhatsApp y caja manual. Sin visibilidad real del negocio.",
-    what: "POS completo, gestión de inventario, analytics en tiempo real y app móvil para deliveries en una sola plataforma.",
+    what: "Analytics en tiempo real y gestión de menú en una sola plataforma.",
     stack: [
       { name: "Next.js" },
       { name: "TypeScript" },
