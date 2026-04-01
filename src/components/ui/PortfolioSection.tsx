@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 import Button from "./Button";
 
 interface Project {
@@ -9,11 +10,10 @@ interface Project {
   category: string;
   problem: string;
   what: string;
-  stack: string[];
-  metrics: { value: string; label: string; color: string }[];
+  stack: { name: string; icon?: string }[];
   url?: string;
   status: string;
-  featured?: boolean;
+  image: string;
 }
 
 const projects: Project[] = [
@@ -24,25 +24,15 @@ const projects: Project[] = [
       "Restaurantes operando con planillas, WhatsApp y caja manual. Sin visibilidad real del negocio.",
     what: "POS completo, gestión de inventario, analytics en tiempo real y app móvil para deliveries en una sola plataforma.",
     stack: [
-      "Next.js",
-      "TypeScript",
-      "Supabase",
-      "MercadoPago",
-      "PWA",
-      "React Native",
-    ],
-    metrics: [
-      {
-        value: "15+",
-        label: "Restaurantes activos",
-        color: "text-text-primary",
-      },
-      { value: "+200%", label: "Crecimiento", color: "text-success" },
-      { value: "99.9%", label: "Uptime", color: "text-accent-blue" },
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "Supabase" },
+      { name: "MercadoPago" },
+      { name: "React Native" },
     ],
     url: "https://www.mesadigital.cl",
     status: "En producción",
-    featured: true,
+    image: "/portfolio-mesadigital.png",
   },
   {
     name: "Y4 Platform",
@@ -50,157 +40,133 @@ const projects: Project[] = [
     problem:
       "Profesionales y empresas usando 5–7 herramientas para gestionar su presencia digital.",
     what: "Linktree + Calendly + WeTransfer + Analytics + QR en una sola plataforma. Tu negocio completo en un link.",
-    stack: ["Next.js", "TypeScript", "Supabase", "OAuth multi-provider"],
-    metrics: [
-      { value: "Freemium", label: "Modelo", color: "text-text-primary" },
-      { value: "4 planes", label: "Desde gratis", color: "text-accent-blue" },
-      { value: "Prod.", label: "En y4.cl", color: "text-success" },
+    stack: [
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "Supabase" },
+      { name: "OAuth" },
     ],
     url: "https://y4.cl",
     status: "En producción",
+    image: "/portfolio-y4.png",
+  },
+  {
+    name: "Klypt",
+    category: "Utilidad · Gestor de notas flotante",
+    problem:
+      "Necesidad de acceso rápido a notas y historial de portapapeles sin cambiar de ventana.",
+    what: "App de escritorio flotante always-on-top para notas rápidas e historial de portapapeles con búsqueda fuzzy.",
+    stack: [
+      { name: "Tauri 2" },
+      { name: "Rust" },
+      { name: "TypeScript" },
+      { name: "SQLite" },
+    ],
+    status: "En desarrollo",
+    image: "/portfolio-klypt.png",
+  },
+  {
+    name: "WarrGate",
+    category: "Infraestructura · Auth multi-tenant",
+    problem:
+      "Cada proyecto necesita construir autenticación desde cero: JWT, refresh tokens, roles, multi-tenant, seguridad.",
+    what: "Plataforma de autenticación multi-tenant lista para producción. Registro, login, refresh tokens, gestión de roles y aislamiento por tenant en una sola API.",
+    stack: [
+      { name: "Node.js" },
+      { name: "TypeScript" },
+      { name: "Fastify" },
+      { name: "PostgreSQL" },
+      { name: "GCP" },
+    ],
+    status: "En desarrollo",
+    image: "/portfolio-warrgate.png",
+  },
+  {
+    name: "WarrGraph MCP",
+    category: "Infraestructura · AI & Code Intelligence",
+    problem:
+      "Los LLMs suelen perder contexto en repositorios grandes o consumen demasiados tokens al leer archivos completos.",
+    what: "Servidor MCP de alto rendimiento que utiliza grafos de inteligencia (RIG) y búsqueda semántica para proporcionar a la IA solo el contexto exacto que necesita.",
+    stack: [
+      { name: "TypeScript" },
+      { name: "SQLite" },
+      { name: "AST Parsing" },
+      { name: "MCP SDK" },
+    ],
+    status: "Código abierto",
+    image: "/WARRGRAPH.png",
   },
 ];
 
-function FeaturedProject({ project }: { project: Project }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="bg-bg-secondary border border-border rounded-2xl overflow-hidden"
-    >
-      <div className="grid lg:grid-cols-2">
-        <div className="bg-bg-tertiary p-10 flex flex-col justify-center min-h-56 relative">
-          <div className="absolute top-4 left-4 flex items-center gap-2">
-            <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
-            <span className="text-xs text-text-muted">{project.status}</span>
-          </div>
-          <div className="text-7xl font-extrabold text-primary/10 font-jakarta mb-4 leading-none">
-            MD
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {project.stack.slice(0, 4).map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded text-xs"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-8">
-          <div className="text-xs text-text-muted font-medium mb-2 uppercase tracking-wider">
-            {project.category}
-          </div>
-          <h3 className="text-2xl font-extrabold text-text-primary mb-5 font-jakarta">
-            {project.name}
-          </h3>
-
-          <div className="mb-4">
-            <div className="text-xs text-text-muted mb-1">Problema</div>
-            <p className="text-sm text-text-secondary leading-relaxed">
-              {project.problem}
-            </p>
-          </div>
-
-          <div className="mb-6">
-            <div className="text-xs text-text-muted mb-1">Qué construimos</div>
-            <p className="text-sm text-text-secondary leading-relaxed">
-              {project.what}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3 mb-6">
-            {project.metrics.map((m) => (
-              <div
-                key={m.label}
-                className="bg-bg-tertiary rounded-xl p-3 text-center"
-              >
-                <div className={`text-lg font-bold font-jakarta ${m.color}`}>
-                  {m.value}
-                </div>
-                <div className="text-xs text-text-muted mt-0.5">{m.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {project.url && (
-            <Button
-              variant="outline"
-              size="sm"
-              icon={ExternalLink}
-              onClick={() => window.open(project.url, "_blank")}
-            >
-              Ver sitio
-            </Button>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function SecondaryProject({
-  project,
-  index,
-}: {
-  project: Project;
-  index: number;
-}) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="bg-bg-secondary border border-border rounded-2xl p-7 hover:border-primary/30 transition-colors"
+      className="bg-bg-secondary border border-border rounded-2xl overflow-hidden hover:border-primary/30 transition-colors group"
     >
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <div className="text-xs text-text-muted mb-1">{project.category}</div>
-          <h3 className="text-xl font-bold text-text-primary font-jakarta">
-            {project.name}
-          </h3>
-        </div>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          <div className="w-1.5 h-1.5 bg-success rounded-full" />
+      {/* Screenshot preview */}
+      <div className="relative h-52 overflow-hidden bg-bg-tertiary">
+        <Image
+          src={project.image}
+          alt={`${project.name} landing`}
+          fill
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-secondary/90" />
+          <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
+          <div
+            className={`w-1.5 h-1.5 rounded-full ${
+              project.status === "En producción"
+                ? "bg-success animate-pulse"
+                : project.status === "Código abierto"
+                ? "bg-accent-blue"
+                : "bg-yellow-400"
+            }`}
+          />
           <span className="text-xs text-text-muted">{project.status}</span>
         </div>
       </div>
 
-      <p className="text-sm text-text-secondary leading-relaxed mb-5">
-        {project.what}
-      </p>
+      {/* Content */}
+      <div className="p-7">
+        <div className="text-xs text-text-muted font-medium mb-1 uppercase tracking-wider">
+          {project.category}
+        </div>
+        <h3 className="text-xl font-bold text-text-primary font-jakarta mb-4">
+          {project.name}
+        </h3>
 
-      <div className="grid grid-cols-3 gap-2 mb-5">
-        {project.metrics.map((m) => (
-          <div
-            key={m.label}
-            className="bg-bg-tertiary rounded-lg p-2.5 text-center"
-          >
-            <div className={`text-base font-bold font-jakarta ${m.color}`}>
-              {m.value}
-            </div>
-            <div className="text-xs text-text-muted mt-0.5">{m.label}</div>
+        <div className="space-y-3 mb-5">
+          <div>
+            <div className="text-xs text-text-muted mb-1">Problema</div>
+            <p className="text-sm text-text-secondary leading-relaxed">
+              {project.problem}
+            </p>
           </div>
-        ))}
-      </div>
+          <div>
+            <div className="text-xs text-text-muted mb-1">Solución</div>
+            <p className="text-sm text-text-secondary leading-relaxed">
+              {project.what}
+            </p>
+          </div>
+        </div>
 
-      <div className="flex flex-wrap gap-1.5">
-        {project.stack.map((tag) => (
-          <span
-            key={tag}
-            className="px-2 py-0.5 bg-bg-tertiary text-text-muted border border-border rounded text-xs"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {project.stack.map((tag) => (
+            <span
+              key={tag.name}
+              className="px-2 py-0.5 bg-bg-tertiary text-text-muted border border-border rounded text-xs"
+            >
+              {tag.name}
+            </span>
+          ))}
+        </div>
 
-      {project.url && (
-        <div className="mt-5">
+        {project.url && (
           <Button
             variant="outline"
             size="sm"
@@ -209,16 +175,13 @@ function SecondaryProject({
           >
             Ver sitio
           </Button>
-        </div>
-      )}
+        )}
+      </div>
     </motion.div>
   );
 }
 
 export default function PortfolioSection() {
-  const featured = projects.filter((p) => p.featured);
-  const secondary = projects.filter((p) => !p.featured);
-
   return (
     <section id="portfolio" className="py-24 bg-bg-primary">
       <div className="max-w-6xl mx-auto px-6">
@@ -240,17 +203,10 @@ export default function PortfolioSection() {
           </p>
         </motion.div>
 
-        <div className="space-y-6">
-          {featured.map((p) => (
-            <FeaturedProject key={p.name} project={p} />
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((p, i) => (
+            <ProjectCard key={p.name} project={p} index={i} />
           ))}
-          {secondary.length > 0 && (
-            <div className="grid md:grid-cols-2 gap-6">
-              {secondary.map((p, i) => (
-                <SecondaryProject key={p.name} project={p} index={i} />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </section>
