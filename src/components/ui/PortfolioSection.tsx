@@ -97,6 +97,22 @@ const projects: Project[] = [
     image: "/WARRGRAPH.png",
   },
   {
+    name: "ChatLLM Hub",
+    category: "AI Infrastructure · Orquestador multi-modelo",
+    problem:
+      "La dependencia de proveedores únicos de IA y la dificultad de mantener contexto persistente y privado en conversaciones complejas.",
+    what: "Plataforma unificada que permite alternar entre modelos locales (Ollama) y cloud, con optimización de contexto dinámica y extracción de perfiles para una IA con memoria a largo plazo.",
+    stack: [
+      { name: "React" },
+      { name: "Node.js" },
+      { name: "Supabase" },
+      { name: "Ollama" },
+      { name: "Tailwind" },
+    ],
+    status: "En desarrollo",
+    image: "/chatllm.png",
+  },
+  {
     name: "Umbral",
     category: "Juego · Estrategia multiplayer en tiempo real",
     problem:
