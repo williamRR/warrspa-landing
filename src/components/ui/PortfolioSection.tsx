@@ -94,6 +94,7 @@ const projects: Project[] = [
       { name: "AST Parsing" },
       { name: "MCP SDK" },
     ],
+    url: "https://github.com/williamRR/mcp-filesystem-rig",
     status: "Código abierto",
     image: "/WARRGRAPH.png",
   },
