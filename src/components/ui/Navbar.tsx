@@ -18,6 +18,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -25,8 +26,8 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-bg-primary/90 backdrop-blur-md border-b border-border"
+        isScrolled && !isOpen
+          ? "bg-tinta/85 backdrop-blur-md border-b border-linea"
           : "bg-transparent"
       }`}
     >
@@ -35,7 +36,7 @@ export default function Navbar() {
           <a
             href="#inicio"
             aria-label="WarrSPA — inicio"
-            className="text-text-primary hover:text-primary transition-colors"
+            className="text-espuma hover:text-agua transition-colors"
           >
             <Logo size={22} />
           </a>
@@ -45,7 +46,7 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                className="text-sm text-bruma hover:text-espuma transition-colors"
               >
                 {item.name}
               </a>
@@ -62,7 +63,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={isOpen}
-            className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-2"
+            className="md:hidden text-bruma hover:text-espuma transition-colors p-2"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -70,19 +71,19 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-bg-primary/95 backdrop-blur-md border-t border-border">
+        <div className="md:hidden bg-tinta/95 backdrop-blur-md border-b border-linea">
           <div className="px-6 py-4 flex flex-col gap-1">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="text-left text-sm text-text-secondary hover:text-text-primary py-2.5 transition-colors"
+                className="text-left text-[15px] text-bruma hover:text-espuma py-2.5 transition-colors"
               >
                 {item.name}
               </a>
             ))}
-            <div className="pt-3">
+            <div className="pt-3 pb-1">
               <Button
                 variant="primary"
                 size="sm"

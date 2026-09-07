@@ -1,19 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
-import Button from "./Button";
 
 interface Project {
   name: string;
   category: string;
   problem: string;
   what: string;
-  stack: { name: string; icon?: string }[];
-  url?: string;
-  status: string;
+  stack: string[];
+  url: string;
   image: string;
+  alt: string;
 }
 
 const projects: Project[] = [
@@ -23,16 +21,10 @@ const projects: Project[] = [
     problem:
       "Restaurantes operando con planillas, WhatsApp y caja manual. Sin visibilidad real del negocio.",
     what: "Analytics en tiempo real y gestión de menú en una sola plataforma.",
-    stack: [
-      { name: "Next.js" },
-      { name: "TypeScript" },
-      { name: "Supabase" },
-      { name: "MercadoPago" },
-      { name: "React Native" },
-    ],
+    stack: ["Next.js", "TypeScript", "Supabase", "MercadoPago", "React Native"],
     url: "https://www.mesadigital.cl",
-    status: "En producción",
-    image: "/portfolio-mesadigital.png",
+    image: "/portfolio-mesadigital-full.png",
+    alt: "Vista completa de la plataforma MesaDigital",
   },
   {
     name: "Y4 Platform",
@@ -40,126 +32,108 @@ const projects: Project[] = [
     problem:
       "Profesionales y empresas usando 5–7 herramientas para gestionar su presencia digital.",
     what: "Linktree + Calendly + WeTransfer + Analytics + QR en una sola plataforma. Tu negocio completo en un link.",
-    stack: [
-      { name: "Next.js" },
-      { name: "TypeScript" },
-      { name: "Supabase" },
-      { name: "OAuth" },
-    ],
+    stack: ["Next.js", "TypeScript", "Supabase", "OAuth"],
     url: "https://y4.cl",
-    status: "En producción",
-    image: "/portfolio-y4.png",
+    image: "/portfolio-y4-full.png",
+    alt: "Vista completa de la plataforma Y4",
   },
 ];
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function Caso({ project, invertido }: { project: Project; invertido: boolean }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="bg-bg-secondary border border-border rounded-2xl overflow-hidden hover:border-primary/30 transition-colors group"
+    <article
+      className={`grupo-caso grid lg:grid-cols-2 gap-10 lg:gap-14 items-center ${
+        invertido ? "lg:[&>*:first-child]:order-2" : ""
+      }`}
     >
-      {/* Screenshot preview */}
-      <div className="relative h-52 overflow-hidden bg-bg-tertiary">
+      {/* Screenshot completo dentro de una ventana; al hover recorre la página. */}
+      <a
+        href={project.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Ver ${project.name} en una nueva pestaña`}
+        className="marco block relative h-[380px] lg:h-[460px] overflow-hidden rounded-xl border border-linea bg-tinta-2 shadow-2xl shadow-black/40"
+      >
         <Image
           src={project.image}
-          alt={`${project.name} landing`}
-          fill
-          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          alt={project.alt}
+          width={1265}
+          height={4748}
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="recorre absolute inset-x-0 top-0 w-full h-auto"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg-secondary/90" />
-          <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
-          <div
-            className={`w-1.5 h-1.5 rounded-full ${
-              project.status === "En producción"
-                ? "bg-success animate-pulse"
-                : project.status === "Código abierto"
-                ? "bg-accent-blue"
-                : "bg-yellow-400"
-            }`}
-          />
-          <span className="text-xs text-text-muted">{project.status}</span>
-        </div>
-      </div>
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-tinta to-transparent pointer-events-none" />
+      </a>
 
-      {/* Content */}
-      <div className="p-7">
-        <div className="text-xs text-text-muted font-medium mb-1 uppercase tracking-wider">
-          {project.category}
+      <div>
+        <div className="flex items-center gap-2 text-sm text-bruma mb-4">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-agua opacity-60 animate-ping" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-agua" />
+          </span>
+          En producción — {project.url.replace("https://", "")}
         </div>
-        <h3 className="text-xl font-bold text-text-primary font-display mb-4">
+
+        <h3 className="text-3xl lg:text-4xl font-bold text-espuma tracking-[-0.02em] mb-1">
           {project.name}
         </h3>
+        <p className="text-bruma text-sm mb-8">{project.category}</p>
 
-        <div className="space-y-3 mb-5">
+        <div className="space-y-6 mb-8 max-w-lg">
           <div>
-            <div className="text-xs text-text-muted mb-1">Problema</div>
-            <p className="text-sm text-text-secondary leading-relaxed">
+            <div className="text-xs text-humo mb-1.5">El problema</div>
+            <p className="text-espuma/90 leading-relaxed">
               {project.problem}
             </p>
           </div>
           <div>
-            <div className="text-xs text-text-muted mb-1">Solución</div>
-            <p className="text-sm text-text-secondary leading-relaxed">
-              {project.what}
-            </p>
+            <div className="text-xs text-humo mb-1.5">Lo que construimos</div>
+            <p className="text-espuma/90 leading-relaxed">{project.what}</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 mb-5">
+        <div className="flex flex-wrap gap-2 mb-8">
           {project.stack.map((tag) => (
             <span
-              key={tag.name}
-              className="px-2 py-0.5 bg-bg-tertiary text-text-muted border border-border rounded text-xs"
+              key={tag}
+              className="px-2.5 py-1 text-xs text-bruma border border-linea rounded-full"
             >
-              {tag.name}
+              {tag}
             </span>
           ))}
         </div>
 
-        {project.url && (
-          <Button
-            variant="outline"
-            size="sm"
-            icon={ExternalLink}
-            onClick={() => window.open(project.url, "_blank")}
-          >
-            Ver sitio
-          </Button>
-        )}
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-agua hover:text-agua-viva transition-colors"
+        >
+          <ExternalLink className="w-4 h-4" />
+          Ver {project.name} en vivo
+        </a>
       </div>
-    </motion.div>
+    </article>
   );
 }
 
 export default function PortfolioSection() {
   return (
-    <section id="portfolio" className="py-24 bg-bg-primary">
+    <section id="portfolio" className="py-28 border-t border-linea">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-            Casos de éxito
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
+        <div className="grid lg:grid-cols-2 gap-8 items-end mb-16 lg:mb-24">
+          <h2 className="text-[clamp(2rem,3.6vw,3rem)] font-bold text-espuma tracking-[-0.03em] leading-[1.08]">
             Productos en producción
           </h2>
-          <p className="text-text-secondary max-w-xl leading-relaxed">
-            No solo entregamos código — operamos productos reales. Estas
-            plataformas sirven a clientes activos hoy.
+          <p className="text-bruma leading-relaxed lg:pb-2 max-w-md lg:justify-self-end">
+            No solo entregamos código: operamos productos reales. Estas
+            plataformas tienen clientes activos hoy.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-24 lg:space-y-32">
           {projects.map((p, i) => (
-            <ProjectCard key={p.name} project={p} index={i} />
+            <Caso key={p.name} project={p} invertido={i % 2 === 1} />
           ))}
         </div>
       </div>

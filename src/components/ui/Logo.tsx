@@ -33,7 +33,7 @@ export default function Logo({
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="49.5" cy="12" r="3.4" className="fill-primary" />
+        <circle cx="49.5" cy="12" r="3.4" className="fill-agua" />
       </svg>
       {withWordmark && (
         <span

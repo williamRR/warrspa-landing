@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { MessageCircle, Mail, Clock, Send } from "lucide-react";
 import Button from "./Button";
 
@@ -11,6 +10,9 @@ const stages = [
   "Tengo producto, necesito escalar",
   "Migración / refactor",
 ];
+
+const inputClase =
+  "w-full bg-claro-2 border border-linea-clara rounded-lg px-4 py-3 text-[15px] text-tinta-clara placeholder:text-bruma-clara focus:outline-none focus:border-profundo transition-colors";
 
 export default function ContactSection() {
   const [form, setForm] = useState({
@@ -46,42 +48,30 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-24 bg-bg-primary">
+    <section
+      id="contacto"
+      className="superficie bg-claro text-tinta-clara py-24 lg:py-32"
+    >
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-            Contacto
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
+        <div className="grid lg:grid-cols-2 gap-8 items-end mb-14">
+          <h2 className="text-[clamp(2rem,3.6vw,3rem)] font-bold tracking-[-0.03em] leading-[1.08]">
             Empecemos a construir algo real
           </h2>
-          <p className="text-text-secondary max-w-xl leading-relaxed">
+          <p className="text-bruma-clara leading-relaxed max-w-md lg:justify-self-end lg:pb-2">
             Cuéntanos dónde estás y qué necesitas. Respondemos dentro de 24h
             hábiles.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid lg:grid-cols-3 gap-10">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-          >
+        <div className="grid lg:grid-cols-5 gap-10">
+          <div className="lg:col-span-3">
             {sent ? (
-              <div className="bg-bg-secondary border border-success/30 rounded-2xl p-12 text-center">
-                <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Send className="w-5 h-5 text-success" />
+              <div className="bg-claro-2 border border-linea-clara rounded-2xl p-12 text-center">
+                <div className="w-12 h-12 bg-profundo/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Send className="w-5 h-5 text-profundo" />
                 </div>
-                <h3 className="text-xl font-bold text-text-primary font-display mb-2">
-                  Casi listo
-                </h3>
-                <p className="text-text-secondary text-sm">
+                <h3 className="text-xl font-bold mb-2">Casi listo</h3>
+                <p className="text-bruma-clara text-[15px] leading-relaxed max-w-sm mx-auto">
                   Abrimos tu cliente de correo con el mensaje prellenado — solo
                   envía el email y te respondemos en menos de 24h hábiles. Si
                   prefieres, escríbenos directo por WhatsApp.
@@ -90,14 +80,15 @@ export default function ContactSection() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="bg-bg-secondary border border-border rounded-2xl p-8 space-y-5"
+                className="bg-claro-2 border border-linea-clara rounded-2xl p-8 space-y-6"
               >
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm text-text-secondary mb-2">
+                    <label htmlFor="c-nombre" className="block text-sm mb-2">
                       Nombre
                     </label>
                     <input
+                      id="c-nombre"
                       type="text"
                       required
                       value={form.name}
@@ -105,14 +96,15 @@ export default function ContactSection() {
                         setForm({ ...form, name: e.target.value })
                       }
                       placeholder="Tu nombre"
-                      className="w-full bg-bg-tertiary border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                      className={inputClase}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-text-secondary mb-2">
+                    <label htmlFor="c-email" className="block text-sm mb-2">
                       Email
                     </label>
                     <input
+                      id="c-email"
                       type="email"
                       required
                       value={form.email}
@@ -120,53 +112,56 @@ export default function ContactSection() {
                         setForm({ ...form, email: e.target.value })
                       }
                       placeholder="tu@empresa.com"
-                      className="w-full bg-bg-tertiary border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                      className={inputClase}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm text-text-secondary mb-2">
-                    Empresa (opcional)
+                  <label htmlFor="c-empresa" className="block text-sm mb-2">
+                    Empresa <span className="text-bruma-clara">(opcional)</span>
                   </label>
                   <input
+                    id="c-empresa"
                     type="text"
                     value={form.company}
                     onChange={(e) =>
                       setForm({ ...form, company: e.target.value })
                     }
                     placeholder="Nombre de tu empresa"
-                    className="w-full bg-bg-tertiary border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 transition-colors"
+                    className={inputClase}
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm text-text-secondary mb-3">
+                <fieldset>
+                  <legend className="text-sm mb-3">
                     ¿En qué etapa estás?
-                  </label>
+                  </legend>
                   <div className="flex flex-wrap gap-2">
                     {stages.map((stage) => (
                       <button
                         key={stage}
                         type="button"
+                        aria-pressed={form.stage === stage}
                         onClick={() => setForm({ ...form, stage })}
-                        className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
+                        className={`px-4 py-2 rounded-full text-sm border transition-colors ${
                           form.stage === stage
-                            ? "bg-primary/10 text-primary border-primary/40"
-                            : "border-border text-text-muted hover:border-primary/30 hover:text-text-secondary"
+                            ? "bg-profundo text-white border-profundo"
+                            : "border-linea-clara text-bruma-clara hover:border-tinta-clara/40 hover:text-tinta-clara"
                         }`}
                       >
                         {stage}
                       </button>
                     ))}
                   </div>
-                </div>
+                </fieldset>
 
                 <div>
-                  <label className="block text-sm text-text-secondary mb-2">
+                  <label htmlFor="c-mensaje" className="block text-sm mb-2">
                     ¿Qué necesitas?
                   </label>
                   <textarea
+                    id="c-mensaje"
                     rows={4}
                     required
                     value={form.message}
@@ -174,87 +169,78 @@ export default function ContactSection() {
                       setForm({ ...form, message: e.target.value })
                     }
                     placeholder="Cuéntanos sobre tu proyecto, idea o problema..."
-                    className="w-full bg-bg-tertiary border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                    className={`${inputClase} resize-none`}
                   />
                 </div>
 
-                <Button variant="primary" size="lg" type="submit" icon={Send}>
+                <Button variant="solido" size="lg" type="submit" icon={Send}>
                   Solicitar diagnóstico
                 </Button>
               </form>
             )}
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-4"
-          >
+          <div className="lg:col-span-2 flex flex-col gap-4">
             <a
               href="https://wa.me/56930023354"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-bg-secondary border border-border rounded-2xl p-6 hover:border-success/40 transition-colors"
+              className="group bg-claro-2 border border-linea-clara rounded-2xl p-6 hover:border-profundo/50 transition-colors"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-success/10 rounded-xl flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-success" />
+                <div className="w-10 h-10 bg-profundo/10 rounded-xl flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-profundo" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-text-primary">
-                    WhatsApp
-                  </div>
-                  <div className="text-xs text-text-muted">
+                  <div className="text-[15px] font-semibold">WhatsApp</div>
+                  <div className="text-xs text-bruma-clara">
                     Respuesta rápida
                   </div>
                 </div>
               </div>
-              <div className="text-sm text-text-secondary group-hover:text-text-primary transition-colors">
+              <div className="text-[15px] group-hover:text-profundo transition-colors">
                 +56 9 3002 3354
               </div>
             </a>
 
             <a
               href="mailto:hola@warrspa.com"
-              className="group bg-bg-secondary border border-border rounded-2xl p-6 hover:border-accent-blue/40 transition-colors"
+              className="group bg-claro-2 border border-linea-clara rounded-2xl p-6 hover:border-profundo/50 transition-colors"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-accent-blue/10 rounded-xl flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-accent-blue" />
+                <div className="w-10 h-10 bg-profundo/10 rounded-xl flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-profundo" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-text-primary">
-                    Email
-                  </div>
-                  <div className="text-xs text-text-muted">
+                  <div className="text-[15px] font-semibold">Email</div>
+                  <div className="text-xs text-bruma-clara">
                     Para conversaciones formales
                   </div>
                 </div>
               </div>
-              <div className="text-sm text-text-secondary group-hover:text-text-primary transition-colors">
+              <div className="text-[15px] group-hover:text-profundo transition-colors">
                 hola@warrspa.com
               </div>
             </a>
 
-            <div className="bg-bg-secondary border border-border rounded-2xl p-6">
+            <div className="bg-claro-2 border border-linea-clara rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 bg-profundo/10 rounded-xl flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-profundo" />
                 </div>
-                <div className="text-sm font-semibold text-text-primary">
+                <div className="text-[15px] font-semibold">
                   Tiempo de respuesta
                 </div>
               </div>
-              <p className="text-sm text-text-secondary">
+              <p className="text-[15px] text-bruma-clara leading-relaxed">
                 Respondemos en{" "}
-                <span className="text-text-primary font-medium">
+                <span className="text-tinta-clara font-medium">
                   menos de 24h hábiles
                 </span>
                 . Si es urgente, WhatsApp es la vía más rápida.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

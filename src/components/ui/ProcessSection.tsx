@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const steps = [
   {
     number: "01",
@@ -35,56 +33,50 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section
-      id="proceso"
-      className="py-24 bg-bg-secondary border-y border-border"
-    >
+    <section id="proceso" className="py-28 border-t border-linea">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-            Cómo trabajamos
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
-            Planificación en cascada,{" "}
-            <br className="hidden md:block" />
+        <div className="grid lg:grid-cols-2 gap-8 items-end mb-16 lg:mb-20">
+          <h2 className="text-[clamp(2rem,3.6vw,3rem)] font-bold text-espuma tracking-[-0.03em] leading-[1.08]">
+            Planificación en cascada,
+            <br />
             ejecución iterativa.
           </h2>
-          <p className="text-text-secondary max-w-xl leading-relaxed">
+          <p className="text-bruma leading-relaxed lg:pb-2 max-w-md lg:justify-self-end">
             No improvisamos ni nos perdemos en burocracia. Cada proyecto parte
             con un plan exhaustivo y avanza en ciclos cortos con entregables
             reales.
           </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-4 gap-8">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <div className="text-4xl font-extrabold text-primary/15 font-display mb-4 leading-none">
-                {step.number}
-              </div>
-              <h3 className="text-lg font-bold text-text-primary mb-3 font-display">
-                {step.title}
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                {step.description}
-              </p>
-              <div className="inline-flex items-center text-xs text-text-muted border border-border rounded-full px-3 py-1">
-                {step.duration}
-              </div>
-            </motion.div>
-          ))}
         </div>
+
+        <ol className="relative grid md:grid-cols-4 gap-10 md:gap-8">
+          {/* La línea que conecta la secuencia. */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-[4.5px] left-0 right-0 h-px bg-linea"
+          />
+          {steps.map((step) => (
+            <li key={step.number} className="relative">
+              <span
+                aria-hidden="true"
+                className="hidden md:block absolute top-0 left-0 w-[9px] h-[9px] rounded-full bg-agua"
+              />
+              <div className="md:pt-10">
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="text-sm text-agua font-semibold font-display">
+                    {step.number}
+                  </span>
+                  <h3 className="text-lg font-bold text-espuma tracking-[-0.01em]">
+                    {step.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-bruma leading-relaxed mb-4">
+                  {step.description}
+                </p>
+                <span className="text-xs text-humo">{step.duration}</span>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

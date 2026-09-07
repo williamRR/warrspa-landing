@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const faqs = [
   {
@@ -43,34 +42,32 @@ function FAQItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="border-b border-border last:border-0">
+    <div className="border-b border-linea">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 text-left gap-6"
+        aria-expanded={isOpen}
+        className="w-full flex items-start justify-between py-6 text-left gap-6 group"
       >
-        <span className="text-base font-medium text-text-primary">{q}</span>
-        <span className="flex-shrink-0 text-primary">
-          {isOpen ? (
-            <Minus className="w-4 h-4" />
-          ) : (
-            <Plus className="w-4 h-4" />
-          )}
+        <span className="text-lg font-medium text-espuma leading-snug group-hover:text-agua transition-colors">
+          {q}
         </span>
+        <Plus
+          aria-hidden="true"
+          className={`w-5 h-5 mt-0.5 flex-shrink-0 text-bruma transition-transform duration-300 ${
+            isOpen ? "rotate-45 text-agua" : ""
+          }`}
+        />
       </button>
       {/* Respuesta siempre en el DOM (visible para crawlers/LLMs);
           se colapsa solo visualmente con grid-rows. */}
       <div
         aria-hidden={!isOpen}
-        className={`grid transition-all duration-200 overflow-hidden ${
-          isOpen
-            ? "grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-0"
+        className={`grid transition-all duration-300 overflow-hidden ${
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
         <div className="min-h-0">
-          <p className="text-text-secondary text-sm leading-relaxed pb-5">
-            {a}
-          </p>
+          <p className="text-bruma leading-relaxed pb-6 max-w-2xl">{a}</p>
         </div>
       </div>
     </div>
@@ -81,31 +78,20 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 bg-bg-secondary border-y border-border">
+    <section id="faq" className="py-28 border-t border-linea">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-              Preguntas frecuentes
-            </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-start">
+          <div className="lg:sticky lg:top-28">
+            <h2 className="text-[clamp(2rem,3.6vw,3rem)] font-bold text-espuma tracking-[-0.03em] leading-[1.08] mb-6">
               Preguntas que suelen aparecer antes de empezar
             </h2>
-            <p className="text-text-secondary leading-relaxed">
+            <p className="text-bruma leading-relaxed max-w-md">
               Si tienes una pregunta que no está aquí, escríbenos directamente.
               Respondemos en menos de 24h hábiles.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <div className="border-t border-linea">
             {faqs.map((faq, i) => (
               <FAQItem
                 key={i}
@@ -115,7 +101,7 @@ export default function FAQSection() {
                 onToggle={() => setOpenIndex(openIndex === i ? null : i)}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

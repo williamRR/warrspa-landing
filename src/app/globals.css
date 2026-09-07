@@ -1,70 +1,101 @@
 @import 'tailwindcss';
 
-/* ————— WarrSPA · tokens de marca —————
-   Neutros con sesgo frío-verdoso + un solo acento teal (el "agua" de SPA).
-   El sitio es oscuro: el acento vivo (#35D4C7) vive aquí;
-   el acento de marca original (#0B8B84) queda para superficies claras. */
+/* ————— WarrSPA · "Superficie y profundidad" —————
+   Toda la página vive bajo el agua: tinta profunda, hairlines, tipografía.
+   El contacto emerge a la superficie (--claro), el único panel del sitio
+   donde el teal profundo de marca (#0B8B84) es el acento. */
 :root {
-  --bg-primary: #101416;
-  --bg-secondary: #151B1D;
-  --bg-tertiary: #1B2225;
-  --surface: #1C2427;
-  --border: #283234;
+  --tinta: #0D1315;
+  --tinta-2: #131B1E;
+  --tinta-3: #182225;
+  --linea: #253234;
+  --linea-fuerte: #31403f;
 
-  --text-primary: #F2F4F4;
-  --text-secondary: #9AA5A6;
-  --text-muted: #616D6E;
+  --espuma: #EFF3F3;
+  --bruma: #97A5A5;
+  --humo: #5F6E6E;
 
-  --primary: #35D4C7;
-  --primary-hover: #4ADECE;
-  --primary-deep: #0B8B84;
+  --agua: #35D4C7;
+  --agua-viva: #4FE3D6;
+  --profundo: #0B8B84;
+  --abisal: #0A1012;
 
-  --accent-blue: #1F8F87;
-  --success: #22C55E;
-  --warning: #F59E0B;
+  --claro: #F0F4F4;
+  --claro-2: #FFFFFF;
+  --linea-clara: #D7E0E0;
+  --tinta-clara: #12191B;
+  --bruma-clara: #55676A;
 }
 
 @theme inline {
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-display: var(--font-sora), var(--font-inter), system-ui, sans-serif;
 
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-bg-tertiary: var(--bg-tertiary);
-  --color-surface: var(--surface);
-  --color-border: var(--border);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-tinta-3: var(--tinta-3);
+  --color-linea: var(--linea);
+  --color-linea-fuerte: var(--linea-fuerte);
+  --color-espuma: var(--espuma);
+  --color-bruma: var(--bruma);
+  --color-humo: var(--humo);
+  --color-agua: var(--agua);
+  --color-agua-viva: var(--agua-viva);
+  --color-profundo: var(--profundo);
+  --color-abisal: var(--abisal);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-primary-deep: var(--primary-deep);
-
-  --color-accent-blue: var(--accent-blue);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
+  --color-claro: var(--claro);
+  --color-claro-2: var(--claro-2);
+  --color-linea-clara: var(--linea-clara);
+  --color-tinta-clara: var(--tinta-clara);
+  --color-bruma-clara: var(--bruma-clara);
 }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--tinta);
+  color: var(--espuma);
   font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sora), var(--font-inter), system-ui, sans-serif;
 }
 
-/* Gradiente de acento: teal→teal profundo, sin mezclar familias de color. */
-.text-gradient-teal {
-  background: linear-gradient(135deg, #4ADECE 0%, #14A396 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+::selection {
+  background: var(--agua);
+  color: var(--tinta);
+}
+
+:focus-visible {
+  outline: 2px solid var(--agua);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* En la superficie (sección clara) el foco se dibuja con el teal profundo. */
+.superficie :focus-visible {
+  outline-color: var(--profundo);
 }
 
 [id] {
   scroll-margin-top: 80px;
+}
+
+/* Recorrido lento del screenshot completo al pasar el cursor por un caso.
+   La ventana (.marco) es el contenedor de tamaño: 100cqh = su altura. */
+@media (prefers-reduced-motion: no-preference) {
+  .marco {
+    container-type: size;
+  }
+  .recorre {
+    transition: transform 0.8s ease;
+  }
+  .grupo-caso:hover .recorre,
+  .grupo-caso:focus-within .recorre {
+    transform: translateY(calc(-100% + 100cqh));
+    transition-duration: 14s;
+    transition-timing-function: linear;
+  }
 }

@@ -1,70 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Code, TrendingUp, Zap, ArrowRight } from "lucide-react";
+import { Code, TrendingUp, Zap } from "lucide-react";
 import { FC } from "react";
 
-interface ServiceProps {
+interface Service {
   icon: FC<{ className?: string }>;
   title: string;
   description: string;
   outcome: string;
   features: string[];
-  iconBg: string;
-  index: number;
 }
 
-function ServiceCard({
-  icon: Icon,
-  title,
-  description,
-  outcome,
-  features,
-  iconBg,
-  index,
-}: ServiceProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-bg-secondary border border-border rounded-2xl p-7 hover:border-primary/30 transition-colors duration-300"
-    >
-      <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${iconBg}`}
-      >
-        <Icon className="w-5 h-5 text-white" />
-      </div>
-
-      <h3 className="text-xl font-bold text-text-primary mb-3 font-display">
-        {title}
-      </h3>
-      <p className="text-text-secondary mb-5 leading-relaxed text-sm">
-        {description}
-      </p>
-
-      <div className="bg-bg-tertiary border border-border rounded-xl p-4 mb-5">
-        <div className="text-xs text-text-muted mb-1">Resultado esperado</div>
-        <div className="text-sm text-text-primary font-medium">{outcome}</div>
-      </div>
-
-      <ul className="space-y-2">
-        {features.map((f) => (
-          <li
-            key={f}
-            className="flex items-center gap-2 text-sm text-text-secondary"
-          >
-            <ArrowRight className="w-3 h-3 text-primary flex-shrink-0" />
-            {f}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
-  );
-}
-
-const services = [
+const services: Service[] = [
   {
     icon: Code,
     title: "Custom Development",
@@ -78,7 +25,6 @@ const services = [
       "Diseño de base de datos",
       "Optimización de performance",
     ],
-    iconBg: "bg-primary",
   },
   {
     icon: TrendingUp,
@@ -93,7 +39,6 @@ const services = [
       "Growth engineering",
       "Validación de mercado",
     ],
-    iconBg: "bg-accent-blue",
   },
   {
     icon: Zap,
@@ -107,35 +52,65 @@ const services = [
       "Planificación de escalabilidad",
       "Gestión de deuda técnica",
     ],
-    iconBg: "bg-success",
   },
 ];
 
+function FilaServicio({ service }: { service: Service }) {
+  const Icon = service.icon;
+  return (
+    <div className="group grid lg:grid-cols-12 gap-6 lg:gap-10 py-12 border-t border-linea transition-colors duration-300 hover:bg-tinta-2/40">
+      <div className="lg:col-span-4">
+        <div className="flex items-start gap-4">
+          <Icon className="w-5 h-5 text-agua mt-2 flex-shrink-0" />
+          <h3 className="text-2xl lg:text-[28px] font-bold text-espuma tracking-[-0.02em] leading-snug">
+            {service.title}
+          </h3>
+        </div>
+      </div>
+
+      <div className="lg:col-span-5">
+        <p className="text-bruma leading-relaxed mb-6">
+          {service.description}
+        </p>
+        <div className="border-l-2 border-agua pl-4">
+          <div className="text-xs text-humo mb-1">Resultado</div>
+          <p className="text-espuma text-[15px] font-medium leading-relaxed">
+            {service.outcome}
+          </p>
+        </div>
+      </div>
+
+      <ul className="lg:col-span-3">
+        {service.features.map((f) => (
+          <li
+            key={f}
+            className="text-sm text-bruma py-2.5 border-b border-linea/70 first:pt-0 last:border-0"
+          >
+            {f}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function ServicesSection() {
   return (
-    <section id="servicios" className="py-24 bg-bg-primary">
+    <section id="servicios" className="py-28 border-t border-linea">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-            Servicios
-          </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
+        <div className="grid lg:grid-cols-2 gap-8 items-end mb-16 lg:mb-6">
+          <h2 className="text-[clamp(2rem,3.6vw,3rem)] font-bold text-espuma tracking-[-0.03em] leading-[1.08]">
             Lo que construimos
           </h2>
-          <p className="text-text-secondary max-w-xl leading-relaxed">
-            Cada servicio está orientado a un resultado de negocio concreto. No
-            vendemos horas, construimos producto.
+          <p className="text-bruma leading-relaxed lg:pb-2 max-w-md lg:justify-self-end">
+            Cada servicio apunta a un resultado de negocio concreto. No vendemos
+            horas: construimos producto que queda operando.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {services.map((s, i) => (
-            <ServiceCard key={s.title} {...s} index={i} />
+        <div className="border-b border-linea">
+          {services.map((s) => (
+            <FilaServicio key={s.title} service={s} />
           ))}
         </div>
       </div>
