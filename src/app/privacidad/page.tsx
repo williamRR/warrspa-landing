@@ -13,7 +13,7 @@ const sections: { title: string; body: string[] }[] = [
   {
     title: "1. Responsable del tratamiento",
     body: [
-      "WARRSPA SpA (en adelante, «WarrSPA»), con domicilio en Santiago, Chile, es responsable del tratamiento de los datos personales recopilados a través del sitio web www.warrspa.com.",
+      "WARRSPA SpA, RUT 77.346.791-9 (en adelante, «WarrSPA»), con domicilio en Santiago, Chile, es responsable del tratamiento de los datos personales recopilados a través del sitio web www.warrspa.com.",
       "Para cualquier consulta relacionada con este política o con el tratamiento de tus datos personales, escríbenos a hola@warrspa.com.",
     ],
   },

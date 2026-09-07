@@ -50,6 +50,8 @@ const jsonLd = {
       "@type": "ProfessionalService",
       "@id": "https://www.warrspa.com/#organization",
       name: "WarrSPA",
+      legalName: "WARRSPA SpA",
+      taxID: "77.346.791-9",
       url: "https://www.warrspa.com/",
       description:
         "Agencia de desarrollo de software a medida para empresas: MVPs, SaaS y plataformas B2B con Next.js, TypeScript y Supabase.",

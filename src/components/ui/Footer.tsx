@@ -66,7 +66,8 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
             <p className="text-xs text-text-muted order-2 sm:order-1">
-              © {new Date().getFullYear()} WarrSPA · Santiago, Chile
+              © {new Date().getFullYear()} WarrSPA SpA · RUT 77.346.791-9 ·
+              Santiago, Chile
             </p>
             <div className="flex items-center gap-4 order-1 sm:order-2">
               <a

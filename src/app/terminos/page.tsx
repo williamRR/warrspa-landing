@@ -13,7 +13,7 @@ const sections: { title: string; body: string[] }[] = [
   {
     title: "1. Objeto",
     body: [
-      "Estos términos y condiciones regulan el uso del sitio web www.warrspa.com (el «Sitio»), operado por WARRSPA SpA («WarrSPA»), y establecen las condiciones generales bajo las cuales se presentan los servicios de desarrollo de software a medida ofrecidos por WarrSPA.",
+      "Estos términos y condiciones regulan el uso del sitio web www.warrspa.com (el «Sitio»), operado por WARRSPA SpA, RUT 77.346.791-9 («WarrSPA»), y establecen las condiciones generales bajo las cuales se presentan los servicios de desarrollo de software a medida ofrecidos por WarrSPA.",
       "Al navegar el Sitio o contactarnos a través de él, aceptas estos términos.",
     ],
   },
