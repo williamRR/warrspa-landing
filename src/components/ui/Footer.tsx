@@ -64,9 +64,25 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-border">
-          <p className="text-xs text-text-muted">
-            © {new Date().getFullYear()} WarrSPA · Santiago, Chile
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+            <p className="text-xs text-text-muted order-2 sm:order-1">
+              © {new Date().getFullYear()} WarrSPA · Santiago, Chile
+            </p>
+            <div className="flex items-center gap-4 order-1 sm:order-2">
+              <a
+                href="/privacidad"
+                className="text-xs text-text-muted hover:text-text-secondary transition-colors"
+              >
+                Privacidad
+              </a>
+              <a
+                href="/terminos"
+                className="text-xs text-text-muted hover:text-text-secondary transition-colors"
+              >
+                Términos
+              </a>
+            </div>
+          </div>
           <div className="flex items-center gap-2">
             <a
               href="https://github.com/williamRR"
