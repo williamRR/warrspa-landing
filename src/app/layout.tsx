@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Sora } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
@@ -23,12 +24,12 @@ export const metadata: Metadata = {
   description:
     "Diseñamos y desarrollamos software a medida listo para operar y escalar: MVPs, SaaS y plataformas B2B con Next.js, TypeScript y Supabase. Desde Santiago, Chile.",
   alternates: {
-    canonical: "/",
+    canonical: "https://www.warrspa.com/",
   },
   openGraph: {
     type: "website",
     locale: "es_CL",
-    url: "https://www.warrspa.com",
+    url: "https://www.warrspa.com/",
     siteName: "WarrSPA",
     title: "WarrSPA — Desarrollo de Software a Medida para Empresas",
     description:
@@ -54,10 +55,19 @@ const jsonLd = {
         "Agencia de desarrollo de software a medida para empresas: MVPs, SaaS y plataformas B2B con Next.js, TypeScript y Supabase.",
       email: "hola@warrspa.com",
       telephone: "+56930023354",
+      image: "https://www.warrspa.com/opengraph-image",
+      logo: "https://www.warrspa.com/icon.svg",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Santiago",
+        addressRegion: "RM",
         addressCountry: "CL",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: "+56930023354",
+        url: "https://wa.me/56930023354",
       },
       areaServed: { "@type": "Country", name: "Chile" },
       sameAs: ["https://github.com/williamRR"],
@@ -88,6 +98,66 @@ const jsonLd = {
       inLanguage: "es",
       isPartOf: { "@id": "https://www.warrspa.com/#website" },
       about: { "@id": "https://www.warrspa.com/#organization" },
+      dateModified: "2026-09-07",
+      primaryImageOfPage: "https://www.warrspa.com/opengraph-image",
+    },
+    {
+      // FAQPage: sin beneficio SERP en Google (rich results retirados 2026-05-07);
+      // se incluye para extracción por motores AI y sistemas no-Google.
+      "@type": "FAQPage",
+      "@id": "https://www.warrspa.com/#faq",
+      isPartOf: { "@id": "https://www.warrspa.com/#webpage" },
+      inLanguage: "es",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "¿Cuánto tiempo toma lanzar un MVP?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Depende de la complejidad, pero la mayoría de los MVPs salen en 6–10 semanas. Empezamos con un discovery de 1–2 semanas para definir exactamente qué se va a construir antes de estimar tiempos.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Cómo es el proceso de trabajo?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Planificación exhaustiva al inicio (discovery, arquitectura, criterios de éxito), luego ejecución en ciclos semanales con entregables reales. Tú tienes visibilidad completa del avance en todo momento.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Qué pasa después del lanzamiento?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "El lanzamiento es el inicio, no el fin. Ofrecemos continuidad: monitoreo, iteración basada en feedback real de usuarios y planificación del roadmap de crecimiento.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Trabajan con contrato?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Sí, siempre. El contrato define el alcance, los entregables, los plazos y el ownership del código — que es tuyo desde el primer día. Sin contrato no empezamos.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Puedo escalar el equipo si el proyecto crece?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Absolutamente. Nuestra arquitectura está diseñada para escalar tanto en usuarios como en equipo técnico. Si el producto crece, definimos juntos cómo evoluciona el equipo y el stack.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Qué stack usan?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Next.js 15, TypeScript, Supabase y TailwindCSS como base. Integramos MercadoPago, Stripe, React Native y otras herramientas según el proyecto. No usamos tecnologías experimentales sin haberlas probado en producción primero.",
+          },
+        },
+      ],
     },
     {
       "@type": "Service",
@@ -137,6 +207,7 @@ export default function RootLayout({
         <Navbar />
         <main className="relative">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
