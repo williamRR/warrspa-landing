@@ -11,6 +11,7 @@ interface ButtonProps {
   icon?: LucideIcon;
   iconPosition?: "left" | "right";
   onClick?: () => void;
+  href?: string;
   className?: string;
   type?: "button" | "submit";
   disabled?: boolean;
@@ -23,6 +24,7 @@ export default function Button({
   icon: Icon,
   iconPosition = "right",
   onClick,
+  href,
   className = "",
   type = "button",
   disabled = false,
@@ -45,6 +47,28 @@ export default function Button({
     lg: "px-7 py-3.5 text-base",
   };
 
+  const content = (
+    <>
+      {Icon && iconPosition === "left" && <Icon className="w-4 h-4" />}
+      <span>{children}</span>
+      {Icon && iconPosition === "right" && (
+        <Icon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+      )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        onClick={onClick}
+        className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+      >
+        {content}
+      </a>
+    );
+  }
+
   return (
     <motion.button
       whileHover={disabled ? {} : { scale: 1.02 }}
@@ -54,11 +78,7 @@ export default function Button({
       disabled={disabled}
       className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
     >
-      {Icon && iconPosition === "left" && <Icon className="w-4 h-4" />}
-      <span>{children}</span>
-      {Icon && iconPosition === "right" && (
-        <Icon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-      )}
+      {content}
     </motion.button>
   );
 }

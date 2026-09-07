@@ -1,0 +1,399 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marca WarrSPA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Sora:wght@400;600;700&display=swap">
+<style>
+  :root {
+    --bg: #F5F6F6;
+    --surface: #FFFFFF;
+    --ink: #12171A;
+    --muted: #5D6669;
+    --line: #E1E5E5;
+    --chip: #EDF0F0;
+    --accent: #0B8B84;
+    --accent-ink: #0A6E68;
+    --tile-dark-bg: #12171A;
+    --tile-dark-ink: #F2F4F4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101416;
+      --surface: #181E20;
+      --ink: #F2F4F4;
+      --muted: #97A2A3;
+      --line: #273030;
+      --chip: #1C2426;
+      --accent: #35D4C7;
+      --accent-ink: #35D4C7;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101416;
+    --surface: #181E20;
+    --ink: #F2F4F4;
+    --muted: #97A2A3;
+    --line: #273030;
+    --chip: #1C2426;
+    --accent: #35D4C7;
+    --accent-ink: #35D4C7;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Sora", "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent-ink); font-weight: 600; margin: 0 0 14px;
+  }
+  h1 {
+    font-family: "Bricolage Grotesque", "Sora", sans-serif;
+    font-size: clamp(30px, 4.4vw, 44px);
+    line-height: 1.08; letter-spacing: -0.015em;
+    text-wrap: balance; margin: 0 0 14px;
+  }
+  h2 {
+    font-family: "Bricolage Grotesque", "Sora", sans-serif;
+    font-size: 22px; letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .lede { color: var(--muted); max-width: 58ch; margin: 0 0 40px; }
+  .section { margin-top: 64px; }
+  .section-head { margin-bottom: 22px; }
+  .section-head p { color: var(--muted); margin: 4px 0 0; max-width: 60ch; font-size: 14px; }
+
+  /* ---- tiles ---- */
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .tile-label {
+    position: absolute; top: 12px; left: 14px;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  .tile--dark { background: var(--tile-dark-bg); border-color: var(--tile-dark-bg); }
+  .tile--dark .tile-label { color: #7E8B8C; }
+
+  /* ---- hero lockup ---- */
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hero-grid .tile { min-height: 210px; }
+  .lockup { display: flex; align-items: center; gap: 14px; }
+  .lockup .word {
+    font-weight: 700; letter-spacing: -0.025em; font-size: 34px; line-height: 1;
+  }
+  .lockup .word em { font-style: normal; }
+  .tile--dark .lockup { color: var(--tile-dark-ink); }
+  .tile--dark .lockup .word em { color: #35D4C7; }
+
+  /* ---- anatomy ---- */
+  .anatomy { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+  .anatomy .tile { aspect-ratio: 1; max-height: 380px; }
+  .anatomy-notes { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; }
+  .anatomy-notes li { display: flex; gap: 14px; align-items: baseline; }
+  .anatomy-notes .k {
+    font-family: "Sora", sans-serif; font-weight: 700; color: var(--accent-ink);
+    font-size: 13px; flex: 0 0 auto; letter-spacing: 0.02em;
+  }
+  .anatomy-notes p { margin: 0; color: var(--muted); font-size: 14px; }
+  .anatomy-notes strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- variant grid ---- */
+  .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .variants .tile { aspect-ratio: 1.35; }
+  .variant-note { font-size: 12.5px; color: var(--muted); margin: 10px 2px 0; line-height: 1.5; }
+
+  /* ---- alternates ---- */
+  .alts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .alts .tile { aspect-ratio: 1.9; flex-direction: column; gap: 14px; }
+  .alts .tile small { color: var(--muted); font-size: 12px; }
+
+  /* ---- usage row ---- */
+  .usage { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+  .usage .tile { padding: 26px; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 20px; }
+  .scale-row { display: flex; align-items: flex-end; gap: 28px; padding: 12px 4px 4px; }
+  .scale-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .scale-item span { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .clearspace { display: flex; justify-content: center; padding: 8px 0 2px; }
+  .colors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .swatch {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--line); background: var(--surface);
+    border-radius: 999px; padding: 7px 16px 7px 9px;
+    font: inherit; font-size: 12.5px; color: var(--ink);
+    cursor: pointer;
+  }
+  .swatch:hover { border-color: var(--muted); }
+  .swatch i { width: 20px; height: 20px; border-radius: 50%; display: block; }
+  .swatch code { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+  /* ---- export ---- */
+  .export-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    font: inherit; font-size: 13.5px; font-weight: 600;
+    background: var(--ink); color: var(--bg);
+    border: 1px solid var(--ink); border-radius: 10px;
+    padding: 11px 20px; cursor: pointer;
+  }
+  .btn.ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+  .btn:hover { opacity: 0.88; }
+  .btn:focus-visible, .swatch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .export-note { color: var(--muted); font-size: 13px; margin-top: 14px; max-width: 62ch; }
+
+  footer { margin-top: 72px; padding-top: 22px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 12.5px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .hero-grid, .anatomy, .alts, .usage { grid-template-columns: 1fr; }
+    .variants { grid-template-columns: 1fr 1fr; }
+    .lockup .word { font-size: 26px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">WarrSPA · Identidad visual</p>
+  <h1>Un símbolo, un punto, un sistema.</h1>
+  <p class="lede">El logo de WarrSPA nace de una sola idea: la <strong>W</strong> de trazo continuo y el <strong>punto</strong> final — el momento en que el software queda listo y se entrega. El acento teal, tomado del agua, hace guiño al «SPA» del nombre sin volverse literal.</p>
+
+  <!-- ============ HERO ============ -->
+  <div class="hero-grid">
+    <div class="tile">
+      <span class="tile-label">Principal · fondo claro</span>
+      <div class="lockup">
+        <svg width="46" height="41" viewBox="0 0 54 48" fill="none" aria-hidden="true">
+          <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="#12171A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="49.5" cy="12" r="3.4" fill="#0B8B84"/>
+        </svg>
+        <span class="word">Warr<em>SPA</em></span>
+      </div>
+    </div>
+    <div class="tile tile--dark">
+      <span class="tile-label">Principal · fondo oscuro</span>
+      <div class="lockup">
+        <svg width="46" height="41" viewBox="0 0 54 48" fill="none" aria-hidden="true">
+          <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="#F2F4F4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="49.5" cy="12" r="3.4" fill="#35D4C7"/>
+        </svg>
+        <span class="word">Warr<em>SPA</em></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ANATOMY ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>El símbolo</h2>
+      <p>Construido con trazos de grosor constante y terminaciones redondeadas. Funciona solo, sin la palabra, en cualquier tamaño desde un favicon.</p>
+    </div>
+    <div class="anatomy">
+      <div class="tile">
+        <svg width="290" height="258" viewBox="0 0 54 48" fill="none" aria-hidden="true">
+          <g stroke="#E1E5E5" stroke-width="0.35">
+            <path d="M0 12 H54 M0 24 H54 M0 36 H54"/>
+            <path d="M14 0 V48 M23 0 V48 M32 0 V48 M40 0 V48"/>
+          </g>
+          <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="#12171A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="49.5" cy="12" r="3.4" fill="#0B8B84"/>
+        </svg>
+      </div>
+      <ul class="anatomy-notes">
+        <li><span class="k">01 · La W</span><p>Tres vértices, dos valles: la forma más reconocible de la marca, <strong>dibujada en un solo trazo</strong> como se escribe un buen código — sin interrupciones.</p></li>
+        <li><span class="k">02 · El punto</span><p>El acento teal separado de la W es un <strong>cursor, un punto de deploy, un período</strong>. Dice: esto funciona, esto está listo. Es lo único en color en todo el sistema.</p></li>
+        <li><span class="k">03 · La palabra</span><p>«Warr» y «SPA» comparten peso y caja; <strong>SPA se distingue solo por el color</strong>. Tipografía Sora SemiBold, con tracking cerrado (-2.5%) para un ritmo compacto y técnico.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ VARIANTS ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Variantes de uso</h2>
+      <p>Una sola idea, cuatro manifestaciones. Ninguna variante combina elementos de otra.</p>
+    </div>
+    <div class="variants">
+      <div>
+        <div class="tile">
+          <span class="tile-label">Horizontal</span>
+          <div class="lockup" style="gap:11px">
+            <svg width="32" height="28" viewBox="0 0 54 48" fill="none" aria-hidden="true">
+              <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="49.5" cy="12" r="3.4" fill="var(--accent)"/>
+            </svg>
+            <span class="word" style="font-size:22px">Warr<em style="font-style:normal;color:var(--accent-ink)">SPA</em></span>
+          </div>
+        </div>
+        <p class="variant-note">Cabeceras, firmas de correo, documentos. La versión por defecto.</p>
+      </div>
+      <div>
+        <div class="tile tile--dark">
+          <span class="tile-label">Stacked · oscuro</span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px;color:#F2F4F4">
+            <svg width="54" height="48" viewBox="0 0 54 48" fill="none" aria-hidden="true">
+              <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="#F2F4F4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="49.5" cy="12" r="3.4" fill="#35D4C7"/>
+            </svg>
+            <span class="word" style="font-size:19px;letter-spacing:0.01em">Warr<em style="font-style:normal;color:#35D4C7">SPA</em></span>
+          </div>
+        </div>
+        <p class="variant-note">Espacios cuadrados y superficies oscuras: apps, slides, redes.</p>
+      </div>
+      <div>
+        <div class="tile" style="background:#0B8B84;border-color:#0B8B84">
+          <span class="tile-label" style="color:rgba(255,255,255,.75)">Favicon · app</span>
+          <svg width="88" height="88" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+            <rect width="96" height="96" rx="22" fill="none"/>
+            <path d="M17 26 L32 68 L48 36 L64 68 L79 26" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="89" cy="26" r="6" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <p class="variant-note">Sobre el acento, todo el símbolo pasa a blanco. Es la versión para avatar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ALTERNATES ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Exploraciones descartables</h2>
+      <p>Dos direcciones más del mismo ADN, por si la W principal no convence. El sistema (punto teal, trazo continuo) se mantiene en ambas.</p>
+    </div>
+    <div class="alts">
+      <div class="tile">
+        <svg width="86" height="72" viewBox="0 0 58 48" fill="none" aria-hidden="true">
+          <path d="M6 12 L17 36 L28 12" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+          <path d="M20 12 L31 36 L42 12" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+          <path d="M34 12 L45 36 L52 22" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+          <circle cx="53.5" cy="12" r="3.2" fill="var(--accent)"/>
+        </svg>
+        <small>«Señal» — la W se degrada como una señal que viaja: entrada, procesamiento, entrega.</small>
+      </div>
+      <div class="tile">
+        <svg width="86" height="72" viewBox="0 0 58 48" fill="none" aria-hidden="true">
+          <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="49.5" cy="12" r="8.5" fill="none" stroke="var(--accent)" stroke-width="3"/>
+          <circle cx="49.5" cy="12" r="2.6" fill="var(--accent)"/>
+        </svg>
+        <small>«Órbita» — el punto se convierte en diana: el objetivo del proyecto marcado en la W.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ USAGE ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Uso</h2>
+      <p>Reglas mínimas para que el símbolo sobreviva fuera de esta página.</p>
+    </div>
+    <div class="usage">
+      <div class="tile">
+        <span class="tile-label">Tamaño mínimo</span>
+        <div class="scale-row">
+          <div class="scale-item"><svg width="16" height="14" viewBox="0 0 54 48" fill="none" aria-hidden="true"><path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49.5" cy="12" r="4" fill="var(--accent)"/></svg><span>16 px</span></div>
+          <div class="scale-item"><svg width="24" height="21" viewBox="0 0 54 48" fill="none" aria-hidden="true"><path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49.5" cy="12" r="3.6" fill="var(--accent)"/></svg><span>24 px</span></div>
+          <div class="scale-item"><svg width="48" height="43" viewBox="0 0 54 48" fill="none" aria-hidden="true"><path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49.5" cy="12" r="3.4" fill="var(--accent)"/></svg><span>48 px</span></div>
+        </div>
+        <p style="margin:0;color:var(--muted);font-size:13px">Debajo de 24 px, usar solo el símbolo. El lockup horizontal completo no baja de 120 px de ancho.</p>
+      </div>
+      <div class="tile">
+        <span class="tile-label">Área de respeto</span>
+        <div class="clearspace">
+          <svg width="230" height="150" viewBox="0 0 230 150" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="228" height="148" stroke="var(--line)" stroke-dasharray="4 4"/>
+            <g transform="translate(60,40)">
+              <svg width="110" height="70" viewBox="0 0 54 48" fill="none" overflow="visible" aria-hidden="true">
+                <path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="49.5" cy="12" r="3.4" fill="var(--accent)"/>
+              </svg>
+            </g>
+            <g fill="var(--muted)" font-family="Sora, sans-serif" font-size="9">
+              <text x="30" y="80" text-anchor="middle">1x</text>
+              <text x="115" y="128" text-anchor="middle">1x</text>
+            </g>
+          </svg>
+        </div>
+        <p style="margin:0;color:var(--muted);font-size:13px">Un margen equivalente al punto de acento alrededor de todo el lockup. Nada entra a esa zona.</p>
+      </div>
+    </div>
+
+    <div class="colors" role="list">
+      <button class="swatch" data-hex="#12171A" role="listitem"><i style="background:#12171A;border:1px solid var(--line)"></i><code>Tinta · #12171A</code></button>
+      <button class="swatch" data-hex="#0B8B84" role="listitem"><i style="background:#0B8B84"></i><code>Acento · #0B8B84</code></button>
+      <button class="swatch" data-hex="#35D4C7" role="listitem"><i style="background:#35D4C7;border:1px solid var(--line)"></i><code>Acento oscuro · #35D4C7</code></button>
+      <button class="swatch" data-hex="#F5F6F6" role="listitem"><i style="background:#F5F6F6;border:1px solid var(--line)"></i><code>Papel · #F5F6F6</code></button>
+    </div>
+  </section>
+
+  <!-- ============ EXPORT ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Llevártelo</h2>
+      <p>El código SVG del símbolo, listo para pegar en el proyecto.</p>
+    </div>
+    <div class="export-row">
+      <button class="btn" id="copy-ink">Copiar SVG · fondo claro</button>
+      <button class="btn ghost" id="copy-dark">Copiar SVG · fondo oscuro</button>
+      <button class="btn ghost" id="copy-accent">Copiar SVG · sobre acento</button>
+    </div>
+    <p class="export-note">Cada botón copia un SVG autónomo de 54×48. Para el lockup completo, añade el texto en Sora SemiBold junto al símbolo — la palabra viaja mejor como texto real que como trazos.</p>
+  </section>
+
+  <footer>
+    <span>WarrSPA · Santiago, Chile</span>
+    <span>Sora · Bricolage Grotesque · teal #0B8B84</span>
+  </footer>
+
+</div>
+
+<script>
+  function markSVG(ink, accent) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="54" height="48" viewBox="0 0 54 48" fill="none">'
+      + '<path d="M6 12 L14 36 L23 17 L32 36 L40 12" stroke="' + ink + '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>'
+      + '<circle cx="49.5" cy="12" r="3.4" fill="' + accent + '"/></svg>';
+  }
+  var svgs = {
+    'copy-ink':   markSVG('#12171A', '#0B8B84'),
+    'copy-dark':  markSVG('#F2F4F4', '#35D4C7'),
+    'copy-accent':markSVG('#FFFFFF', '#FFFFFF')
+  };
+  function flash(btn, msg) {
+    var prev = btn.textContent;
+    btn.textContent = msg;
+    btn.disabled = true;
+    setTimeout(function () { btn.textContent = prev; btn.disabled = false; }, 1400);
+  }
+  Object.keys(svgs).forEach(function (id) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var text = svgs[id];
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash(btn, 'Copiado ✓'); },
+          function () { flash(btn, 'No se pudo copiar'); });
+      } else {
+        flash(btn, 'Portapapeles no disponible');
+      }
+    });
+  });
+  document.querySelectorAll('.swatch').forEach(function (sw) {
+    sw.addEventListener('click', function () {
+      var hex = sw.getAttribute('data-hex');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(hex).then(function () { flash(sw, hex + ' copiado'); },
+          function () {});
+      }
+    });
+  });
+</script>

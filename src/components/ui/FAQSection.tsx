@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 
 const faqs = [
@@ -57,21 +57,22 @@ function FAQItem({
           )}
         </span>
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <p className="text-text-secondary text-sm leading-relaxed pb-5">
-              {a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Respuesta siempre en el DOM (visible para crawlers/LLMs);
+          se colapsa solo visualmente con grid-rows. */}
+      <div
+        aria-hidden={!isOpen}
+        className={`grid transition-all duration-200 overflow-hidden ${
+          isOpen
+            ? "grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="min-h-0">
+          <p className="text-text-secondary text-sm leading-relaxed pb-5">
+            {a}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -91,7 +92,7 @@ export default function FAQSection() {
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
               Preguntas frecuentes
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-jakarta">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
               Preguntas que suelen aparecer antes de empezar
             </h2>
             <p className="text-text-secondary leading-relaxed">

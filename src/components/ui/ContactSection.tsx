@@ -24,6 +24,24 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Sin backend por ahora: el envío se hace vía cliente de correo con el
+    // mensaje prellenado. Reemplazar por un endpoint real cuando exista.
+    const subject = encodeURIComponent(
+      `Consulta desde warrspa.com — ${form.name}${form.company ? ` (${form.company})` : ""}`,
+    );
+    const body = encodeURIComponent(
+      [
+        `Nombre: ${form.name}`,
+        `Email: ${form.email}`,
+        form.company ? `Empresa: ${form.company}` : null,
+        form.stage ? `Etapa: ${form.stage}` : null,
+        "",
+        form.message,
+      ]
+        .filter((l) => l !== null)
+        .join("\n"),
+    );
+    window.location.href = `mailto:hola@warrspa.com?subject=${subject}&body=${body}`;
     setSent(true);
   };
 
@@ -39,7 +57,7 @@ export default function ContactSection() {
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             Contacto
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-jakarta">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
             Empecemos a construir algo real
           </h2>
           <p className="text-text-secondary max-w-xl leading-relaxed">
@@ -60,11 +78,13 @@ export default function ContactSection() {
                 <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Send className="w-5 h-5 text-success" />
                 </div>
-                <h3 className="text-xl font-bold text-text-primary font-jakarta mb-2">
-                  Mensaje recibido
+                <h3 className="text-xl font-bold text-text-primary font-display mb-2">
+                  Casi listo
                 </h3>
                 <p className="text-text-secondary text-sm">
-                  Te respondemos en menos de 24h hábiles.
+                  Abrimos tu cliente de correo con el mensaje prellenado — solo
+                  envía el email y te respondemos en menos de 24h hábiles. Si
+                  prefieres, escríbenos directo por WhatsApp.
                 </p>
               </div>
             ) : (
@@ -196,7 +216,7 @@ export default function ContactSection() {
             </a>
 
             <a
-              href="mailto:william.rehel@gmail.com"
+              href="mailto:hola@warrspa.com"
               className="group bg-bg-secondary border border-border rounded-2xl p-6 hover:border-accent-blue/40 transition-colors"
             >
               <div className="flex items-center gap-3 mb-3">

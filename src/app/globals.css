@@ -1,25 +1,33 @@
 @import 'tailwindcss';
 
+/* ————— WarrSPA · tokens de marca —————
+   Neutros con sesgo frío-verdoso + un solo acento teal (el "agua" de SPA).
+   El sitio es oscuro: el acento vivo (#35D4C7) vive aquí;
+   el acento de marca original (#0B8B84) queda para superficies claras. */
 :root {
-  --bg-primary: #0B1020;
-  --bg-secondary: #111827;
-  --bg-tertiary: #172033;
-  --surface: #1E2A3B;
-  --border: #263247;
+  --bg-primary: #101416;
+  --bg-secondary: #151B1D;
+  --bg-tertiary: #1B2225;
+  --surface: #1C2427;
+  --border: #283234;
 
-  --text-primary: #F5F7FB;
-  --text-secondary: #9AA6B2;
-  --text-muted: #5C6B7A;
+  --text-primary: #F2F4F4;
+  --text-secondary: #9AA5A6;
+  --text-muted: #616D6E;
 
-  --primary: #14B8A6;
-  --primary-hover: #0F9E90;
+  --primary: #35D4C7;
+  --primary-hover: #4ADECE;
+  --primary-deep: #0B8B84;
 
-  --accent-blue: #60A5FA;
+  --accent-blue: #1F8F87;
   --success: #22C55E;
   --warning: #F59E0B;
 }
 
 @theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), system-ui, sans-serif;
+
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-tertiary: var(--bg-tertiary);
@@ -32,6 +40,7 @@
 
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --color-primary-deep: var(--primary-deep);
 
   --color-accent-blue: var(--accent-blue);
   --color-success: var(--success);
@@ -45,11 +54,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-jakarta), var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-sora), var(--font-inter), system-ui, sans-serif;
 }
 
+/* Gradiente de acento: teal→teal profundo, sin mezclar familias de color. */
 .text-gradient-teal {
-  background: linear-gradient(135deg, #14B8A6, #60A5FA);
+  background: linear-gradient(135deg, #4ADECE 0%, #14A396 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

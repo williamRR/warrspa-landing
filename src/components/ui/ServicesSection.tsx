@@ -37,7 +37,7 @@ function ServiceCard({
         <Icon className="w-5 h-5 text-white" />
       </div>
 
-      <h3 className="text-xl font-bold text-text-primary mb-3 font-jakarta">
+      <h3 className="text-xl font-bold text-text-primary mb-3 font-display">
         {title}
       </h3>
       <p className="text-text-secondary mb-5 leading-relaxed text-sm">
@@ -124,7 +124,7 @@ export default function ServicesSection() {
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             Servicios
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-jakarta">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
             Lo que construimos
           </h2>
           <p className="text-text-secondary max-w-xl leading-relaxed">

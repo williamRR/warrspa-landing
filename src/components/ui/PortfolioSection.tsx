@@ -50,87 +50,6 @@ const projects: Project[] = [
     status: "En producción",
     image: "/portfolio-y4.png",
   },
-  {
-    name: "Klypt",
-    category: "Utilidad · Gestor de notas flotante",
-    problem:
-      "Necesidad de acceso rápido a notas y historial de portapapeles sin cambiar de ventana.",
-    what: "App de escritorio flotante always-on-top para notas rápidas e historial de portapapeles con búsqueda fuzzy.",
-    stack: [
-      { name: "Tauri 2" },
-      { name: "Rust" },
-      { name: "TypeScript" },
-      { name: "SQLite" },
-    ],
-    url: "https://y4.cl/l/klypt",
-    status: "En desarrollo",
-    image: "/portfolio-klypt.png",
-  },
-  {
-    name: "WarrGate",
-    category: "Infraestructura · Auth multi-tenant",
-    problem:
-      "Cada proyecto necesita construir autenticación desde cero: JWT, refresh tokens, roles, multi-tenant, seguridad.",
-    what: "Plataforma de autenticación multi-tenant lista para producción. Registro, login, refresh tokens, gestión de roles y aislamiento por tenant en una sola API.",
-    stack: [
-      { name: "Node.js" },
-      { name: "TypeScript" },
-      { name: "Fastify" },
-      { name: "PostgreSQL" },
-      { name: "GCP" },
-    ],
-    status: "En desarrollo",
-    image: "/portfolio-warrgate.png",
-  },
-  {
-    name: "WarrGraph MCP",
-    category: "Infraestructura · AI & Code Intelligence",
-    problem:
-      "Los LLMs suelen perder contexto en repositorios grandes o consumen demasiados tokens al leer archivos completos.",
-    what: "Servidor MCP de alto rendimiento que utiliza grafos de inteligencia (RIG) y búsqueda semántica para proporcionar a la IA solo el contexto exacto que necesita.",
-    stack: [
-      { name: "TypeScript" },
-      { name: "SQLite" },
-      { name: "AST Parsing" },
-      { name: "MCP SDK" },
-    ],
-    url: "https://github.com/williamRR/mcp-filesystem-rig",
-    status: "Código abierto",
-    image: "/WARRGRAPH.png",
-  },
-  {
-    name: "ChatLLM Hub",
-    category: "AI Infrastructure · Orquestador multi-modelo",
-    problem:
-      "La dependencia de proveedores únicos de IA y la dificultad de mantener contexto persistente y privado en conversaciones complejas.",
-    what: "Plataforma unificada que permite alternar entre modelos locales (Ollama) y cloud, con optimización de contexto dinámica y extracción de perfiles para una IA con memoria a largo plazo.",
-    stack: [
-      { name: "React" },
-      { name: "Node.js" },
-      { name: "Supabase" },
-      { name: "Ollama" },
-      { name: "Tailwind" },
-    ],
-    url: "https://chat.warrspa.com",
-    status: "En desarrollo",
-    image: "/chatllm.png",
-  },
-  {
-    name: "Umbral",
-    category: "Juego · Estrategia multiplayer en tiempo real",
-    problem:
-      "Juegos de cartas físicos limitados por ubicación geográfica y tiempo. Sin modo online para jugar a distancia.",
-    what: "Juego de cartas async y realtime donde 2-4 jugadores gestionan sistemas de una nave espacial, juegan cartas de ataque, defensa y acciones especiales.",
-    stack: [
-      { name: "Next.js" },
-      { name: "TypeScript" },
-      { name: "Socket.IO" },
-      { name: "Tailwind" },
-    ],
-    url: "https://bacterias.vercel.app",
-    status: "En producción",
-    image: "/portfolio-placeholder.svg",
-  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -171,7 +90,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div className="text-xs text-text-muted font-medium mb-1 uppercase tracking-wider">
           {project.category}
         </div>
-        <h3 className="text-xl font-bold text-text-primary font-jakarta mb-4">
+        <h3 className="text-xl font-bold text-text-primary font-display mb-4">
           {project.name}
         </h3>
 
@@ -229,7 +148,7 @@ export default function PortfolioSection() {
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             Casos de éxito
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-jakarta">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
             Productos en producción
           </h2>
           <p className="text-text-secondary max-w-xl leading-relaxed">

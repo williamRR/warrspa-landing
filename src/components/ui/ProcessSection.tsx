@@ -49,8 +49,8 @@ export default function ProcessSection() {
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             Cómo trabajamos
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-jakarta">
-            Planificación de cascada,
+          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-4 font-display">
+            Planificación en cascada,{" "}
             <br className="hidden md:block" />
             ejecución iterativa.
           </h2>
@@ -70,10 +70,10 @@ export default function ProcessSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="text-4xl font-extrabold text-primary/15 font-jakarta mb-4 leading-none">
+              <div className="text-4xl font-extrabold text-primary/15 font-display mb-4 leading-none">
                 {step.number}
               </div>
-              <h3 className="text-lg font-bold text-text-primary mb-3 font-jakarta">
+              <h3 className="text-lg font-bold text-text-primary mb-3 font-display">
                 {step.title}
               </h3>
               <p className="text-sm text-text-secondary leading-relaxed mb-4">

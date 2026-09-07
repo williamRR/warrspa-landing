@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Button from "./Button";
+import Logo from "./Logo";
 
 const navItems = [
-  { name: "Servicios", href: "servicios" },
-  { name: "Proceso", href: "proceso" },
-  { name: "Portfolio", href: "portfolio" },
-  { name: "Contacto", href: "contacto" },
+  { name: "Servicios", href: "#servicios" },
+  { name: "Proceso", href: "#proceso" },
+  { name: "Portfolio", href: "#portfolio" },
+  { name: "Contacto", href: "#contacto" },
 ];
 
 export default function Navbar() {
@@ -18,20 +18,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setIsOpen(false);
-  };
-
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4 }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-bg-primary/90 backdrop-blur-md border-b border-border"
@@ -40,38 +32,37 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
-          <button
-            onClick={() => scrollTo("inicio")}
-            className="text-xl font-bold text-text-primary font-jakarta hover:text-primary transition-colors"
+          <a
+            href="#inicio"
+            aria-label="WarrSPA — inicio"
+            className="text-text-primary hover:text-primary transition-colors"
           >
-            Warr<span className="text-primary">SPA</span>
-          </button>
+            <Logo size={22} />
+          </a>
 
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.name}
-                onClick={() => scrollTo(item.href)}
+                href={item.href}
                 className="text-sm text-text-secondary hover:text-text-primary transition-colors"
               >
                 {item.name}
-              </button>
+              </a>
             ))}
           </div>
 
           <div className="hidden md:block">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => scrollTo("contacto")}
-            >
+            <Button variant="primary" size="sm" href="#contacto">
               Agendar llamada
             </Button>
           </div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-text-secondary hover:text-text-primary transition-colors"
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isOpen}
+            className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-2"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -79,34 +70,32 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          className="md:hidden bg-bg-primary/95 backdrop-blur-md border-t border-border"
-        >
+        <div className="md:hidden bg-bg-primary/95 backdrop-blur-md border-t border-border">
           <div className="px-6 py-4 flex flex-col gap-1">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.name}
-                onClick={() => scrollTo(item.href)}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
                 className="text-left text-sm text-text-secondary hover:text-text-primary py-2.5 transition-colors"
               >
                 {item.name}
-              </button>
+              </a>
             ))}
             <div className="pt-3">
               <Button
                 variant="primary"
                 size="sm"
-                onClick={() => scrollTo("contacto")}
+                href="#contacto"
+                onClick={() => setIsOpen(false)}
                 className="w-full"
               >
                 Agendar llamada
               </Button>
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
-    </motion.nav>
+    </nav>
   );
 }
